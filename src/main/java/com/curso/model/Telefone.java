@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.ForeignKey;
 
 
+@SuppressWarnings("deprecation")
 @Entity
 public class Telefone {
 	
