@@ -101,7 +101,9 @@ public class PessoaController {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
 		
 		ModelAndView modelandView = new ModelAndView("cadastro/telefones");
+		
 		modelandView.addObject("pessoaobj", pessoa.get());
+		modelandView.addObject("telefones", telefoneRepository.getTelefones(idpessoa));
 		
 		return modelandView;
 	}
@@ -116,6 +118,7 @@ public class PessoaController {
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
 			
 		return modelAndView;
 	}
