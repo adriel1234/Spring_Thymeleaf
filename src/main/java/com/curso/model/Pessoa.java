@@ -1,5 +1,10 @@
 package com.curso.model;
 
+import javax.validation.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,11 +23,16 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
+	@NotNull(message = "Nome não pode ser nulo")
+	@NotEmpty(message = "Nome não pode ser vazio")
 	private String nome;
 	
+	@NotNull(message = "Sobrenome não pode ser nulo")
+	@NotEmpty(message = "Sobrenome não pode ser vazio")
 	private String sobrenome;
 	
+	@Min(value = 18, message = "Idade invalida")
 	private int idade;
 	
 	@OneToMany(mappedBy = "pessoa",orphanRemoval = true,cascade = CascadeType.ALL)

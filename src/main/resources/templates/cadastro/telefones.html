@@ -34,8 +34,14 @@
 	</div>
 	
 	<h5>Telefones</h5>
+	<div th:each="m : ${msg}" style="margin-bottom: 3rem;margin-top: 3rem;">
+		<span th:text="${m}"></span>
+	</div>
 	<div class="row">
-		<form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12">
+		
+		
+		<form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" 
+		class="col s12" onsubmit="return validarCampos()? true :false">
 			<div cs="row">
 				<div class="input-field col s6">
 					<label class="active" for="numero">Número:</label>
@@ -71,6 +77,24 @@
 </div>
  <script type="text/javascript" src="/materialize/js/materialize.js"></script>
  <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+ 
+ <script>
+	 function validarCampos(){
+		 const numero = document.getElementById('numero').value;
+		 const tipo = document.getElementById('tipo').value;
+		 
+		 if(numero === ''){
+			 alert('Numero deve ser informado');
+			 return false;
+		 }else if(tipo === ""){
+			 alert('Tipo deve ser informado');
+			 return false;
+			 
+		 }
+		 
+		 return true;
+	 }
+ </script>
 </body>
 
 </html>

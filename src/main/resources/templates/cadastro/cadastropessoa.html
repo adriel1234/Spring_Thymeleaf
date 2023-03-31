@@ -25,6 +25,10 @@
 	<h3 style="margin-bottom: 3rem;">Spring Boot + Thymeleaf + Material Design Lite</h3>
 	<h5>Cadastro de Pessoa</h5>
 <div class="row">
+	
+	<div th:each = "m : ${msg}">
+		<span th:text = "${m}"></span>
+	</div>
 		
 	<form class="col s12" id="formpessoa"  style="margin-top:3rem;margin-bottom: 3rem;" action="salvarpessoa" method="post" th:object="${pessoaobj}">
 

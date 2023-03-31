@@ -1,5 +1,7 @@
 package com.curso.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,9 +20,8 @@ public class Telefone {
 	private Long id;
 	
 	private String numero;
+	
 	private String tipo;
-	
-	
 	
 	@ForeignKey(name = "pessoa_id")
 	@ManyToOne
