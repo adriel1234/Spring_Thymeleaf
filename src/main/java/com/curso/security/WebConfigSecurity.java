@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -29,6 +28,7 @@ public class WebConfigSecurity  extends WebSecurityConfigurerAdapter{
 		.disable()// desativa as configurações padrao de memoria.
 		.authorizeRequests() // Permiti restringir acessos
 		.antMatchers(HttpMethod.GET,"/").permitAll() // Qualquer usuário acessa a pagina 
+		.antMatchers(HttpMethod.GET,"/cadastropessoa").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()//permite qualquer usuário
 		.and().logout() // Mapeia URL de Logout e invalida o usuário autenticado
@@ -40,11 +40,7 @@ public class WebConfigSecurity  extends WebSecurityConfigurerAdapter{
 		
 		auth.userDetailsService(implementacaoUserDetailService)
 		.passwordEncoder(new BCryptPasswordEncoder());
-		
-//		auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-//		.withUser("adriel")
-//		.password("$2a$10$Mxg6A1EbVocQWegnKwp74ePGeTGgFZYpxcdtIGfl1231RmiRRIvj6")
-//		.roles("ADMIN");
+
 	}
 	
 	@Override //Ignora URL especificas
