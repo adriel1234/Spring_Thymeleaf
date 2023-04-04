@@ -14,17 +14,17 @@ import com.curso.repository.UsuarioRepository;
 @Service
 @Transactional
 public class ImplementacaoUserDetailService implements UserDetailsService {
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuarioRepository.findUserByLogin(username);
-		
+
 		if(usuario == null) {
 			throw new UsernameNotFoundException("Usuario não foi encontrado.");
-			
+
 		}
 		return new User(usuario.getLogin(),
 				usuario.getPassword(),

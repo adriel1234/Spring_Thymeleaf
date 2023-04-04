@@ -17,32 +17,32 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebConfigSecurity  extends WebSecurityConfigurerAdapter{
-	
+
 	@Autowired
 	private ImplementacaoUserDetailService  implementacaoUserDetailService;
-	
-	
+
+
 	@Override // configura as solicitações de acesso por Http
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf()
 		.disable()// desativa as configurações padrao de memoria.
 		.authorizeRequests() // Permiti restringir acessos
-		.antMatchers(HttpMethod.GET,"/").permitAll() // Qualquer usuário acessa a pagina 
+		.antMatchers(HttpMethod.GET,"/").permitAll() // Qualquer usuário acessa a pagina
 		.antMatchers(HttpMethod.GET,"/cadastropessoa").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()//permite qualquer usuário
 		.and().logout() // Mapeia URL de Logout e invalida o usuário autenticado
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
-	
+
 	@Override // Cria autenticação do usuário com banco de dados ou em memória
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
+
 		auth.userDetailsService(implementacaoUserDetailService)
 		.passwordEncoder(new BCryptPasswordEncoder());
 
 	}
-	
+
 	@Override //Ignora URL especificas
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/materialize/**");

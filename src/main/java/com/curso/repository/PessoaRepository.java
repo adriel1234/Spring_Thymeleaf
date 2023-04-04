@@ -12,8 +12,8 @@ import com.curso.model.Pessoa;
 @Repository
 @Transactional
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
-	
+
    @Query("select p from Pessoa p where upper(trim(p.nome)) like %?1%")
    List<Pessoa> buscarPessoaPorNome(String nome);
-	
+
 }

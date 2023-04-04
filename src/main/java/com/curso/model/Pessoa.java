@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -25,18 +25,18 @@ public class Pessoa implements Serializable {
 	@NotNull(message = "Nome não pode ser nulo")
 	@NotEmpty(message = "Nome não pode ser vazio")
 	private String nome;
-	
+
 	@NotNull(message = "Sobrenome não pode ser nulo")
 	@NotEmpty(message = "Sobrenome não pode ser vazio")
 	private String sobrenome;
-	
+
 	@Min(value = 18, message = "Idade invalida")
 	private int idade;
-	
+
 	@OneToMany(mappedBy = "pessoa",orphanRemoval = true,cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
-	
-	
+
+
 	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
 	}
@@ -46,7 +46,7 @@ public class Pessoa implements Serializable {
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
-	
+
 	public int getIdade() {
 		return idade;
 	}
@@ -74,9 +74,9 @@ public class Pessoa implements Serializable {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

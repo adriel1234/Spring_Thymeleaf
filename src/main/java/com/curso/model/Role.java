@@ -15,7 +15,7 @@ public class Role implements GrantedAuthority {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nomeRole;
-	
+
 
 	@Override
 	public String getAuthority() {//ROLE_ADMIN,ROLE_GERENTE,ROLE_SECRETARIO
@@ -24,7 +24,7 @@ public class Role implements GrantedAuthority {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

@@ -12,7 +12,7 @@ import com.curso.model.Telefone;
 @Repository
 @Transactional
 public interface TelefoneRepository extends JpaRepository<Telefone, Long> {
-	
+
 	@Query("select t from Telefone t where t.pessoa.id = ?1")
 	public List<Telefone> getTelefones(Long pessoaid);
 
