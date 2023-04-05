@@ -44,7 +44,7 @@ public class PessoaController {
 
 	@PostMapping({"*/salvarpessoa","salvarpessoa"})
 	public ModelAndView salvar(@Valid Pessoa pessoa,BindingResult bindingResult) {
-
+		pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
 		if(bindingResult.hasErrors()) {
 			ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 			Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
