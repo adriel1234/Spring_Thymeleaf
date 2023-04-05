@@ -28,10 +28,15 @@ public class WebConfigSecurity  extends WebSecurityConfigurerAdapter{
 		.disable()// desativa as configurações padrao de memoria.
 		.authorizeRequests() // Permiti restringir acessos
 		.antMatchers(HttpMethod.GET,"/").permitAll() // Qualquer usuário acessa a pagina
+		.antMatchers("/materialize/**").permitAll()
 		.antMatchers(HttpMethod.GET,"/cadastropessoa").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()//permite qualquer usuário
-		.and().logout() // Mapeia URL de Logout e invalida o usuário autenticado
+		.loginPage("/login")
+		.defaultSuccessUrl("/cadastropessoa")
+		.failureUrl("/login?error=true")
+		.and()
+		.logout().logoutSuccessUrl("/login") // Mapeia URL de Logout e invalida o usuário autenticado
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 
@@ -47,6 +52,7 @@ public class WebConfigSecurity  extends WebSecurityConfigurerAdapter{
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/materialize/**");
 	}
+	
 
 
 }
