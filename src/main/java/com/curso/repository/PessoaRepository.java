@@ -16,4 +16,7 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
    @Query("select p from Pessoa p where upper(trim(p.nome)) like %?1%")
    List<Pessoa> buscarPessoaPorNome(String nome);
 
+   
+   @Query("select p from Pessoa p where upper(trim(p.nome)) like %?1% and p.sexopessoa = ?2")
+   List<Pessoa> buscarPessoaPorNomeSexo(String nome,String sexo);
 }
